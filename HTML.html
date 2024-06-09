@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kullanıcı Kayıt Formu</title>
+    <script>
+        function validateForm() {
+            var isim = document.forms["kullaniciForm"]["isim"].value;
+            var soyisim = document.forms["kullaniciForm"]["soyisim"].value;
+            var email = document.forms["kullaniciForm"]["email"].value;
+            var sifre = document.forms["kullaniciForm"]["sifre"].value;
+            var dogumTarihi = document.forms["kullaniciForm"]["dogumTarihi"].value;
+            var cinsiyet = document.forms["kullaniciForm"]["cinsiyet"].value;
+            
+            if (isim == "" || soyisim == "" || email == "" || sifre == "" || dogumTarihi == "" || cinsiyet == "") {
+                alert("Tüm alanlar doldurulmalıdır.");
+                return false;
+            }
+
+            var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                alert("Geçerli bir e-posta adresi girin.");
+                return false;
+            }
+
+            if (sifre.length < 6) {
+                alert("Şifre en az 6 karakter olmalıdır.");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <form name="kullaniciForm" action="process.php" method="POST" onsubmit="return validateForm()">
+        <label for="isim">İsim:</label><br>
+        <input type="text" id="isim" name="isim"><br>
+        <label for="soyisim">Soyisim:</label><br>
+        <input type="text" id="soyisim" name="soyisim"><br>
+        <label for="email">E-posta:</label><br>
+        <input type="text" id="email" name="email"><br>
+        <label for="sifre">Şifre:</label><br>
+        <input type="password" id="sifre" name="sifre"><br>
+        <label for="dogumTarihi">Doğum Tarihi:</label><br>
+        <input type="date" id="dogumTarihi" name="dogumTarihi"><br>
+        <label for="cinsiyet">Cinsiyet:</label><br>
+        <select id="cinsiyet" name="cinsiyet">
+            <option value="Erkek">Erkek</option>
+            <option value="Kadın">Kadın</option>
+        </select><br><br>
+        <input type="submit" value="Kayıt Ol">
+    </form>
+</body>
+</html>
